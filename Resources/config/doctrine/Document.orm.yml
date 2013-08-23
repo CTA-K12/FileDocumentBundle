@@ -1,0 +1,30 @@
+MESD\File\DocumentBundle\Entity\Document:
+    type: entity
+    table: document
+    fields:
+        id:
+            id: true
+            type: bigint
+            nullable: false
+            generator:
+                strategy: AUTO
+        path:
+            type: string
+        filename:
+            type: string
+        mimetype:
+            type: string
+            nullable: true
+        category:
+            type: string
+            nullable: true
+        hash:
+            type:
+            nullable: false
+    lifecycleCallbacks:
+        prePersist: [ preUpload ]
+        preUpdate: [ preUpload ]
+        postPersist: [ upload ]
+        postUpdate: [ upload ]
+        preRemove: [ storeFilenameForRemove ]
+        postRemove: [ removeDocument ]

@@ -1,0 +1,8 @@
+MESDFileDocument_upload:
+    pattern:  /upload
+    defaults: { _controller: 'MESDFileDocumentBundle:Document:upload' }
+
+MESDFileDocument_receiveUpload:
+    pattern:  /receiveUpload
+    defaults: { _controller: 'MESDFileDocumentBundle:Document:receiveUpload' }
+    requirements: { _method: post }

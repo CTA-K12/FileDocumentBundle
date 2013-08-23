@@ -1,0 +1,3 @@
+MESDFileDocumentBundle_document:
+    resource: '@MESDFileDocumentBundle/Resources/config/routing/document.yml'
+    prefix:   /document

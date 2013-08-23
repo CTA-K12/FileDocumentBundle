@@ -1,0 +1,7 @@
+<form action="{{ path('MESDFileDocument_receiveUpload') }}" method="post" {{ form_enctype(form) }}>
+<div>{{ form_row(form.file) }}</div><div>{{form_errors(form.file) }}</div><div>{{form_widget(form.file) }}</div>
+<div>{{ form_label(form.category) }}</div><div>{{form_errors(form.category) }}</div><div>{{form_widget(form.category) }}</div>
+<div>{{ form_label(form.filename) }}</div><div>(optional) {{form_errors(form.filename) }}</div><div>{{form_widget(form.filename) }}</div>
+<input type="submit" />
+{{ form_rest(form) }}
+</form>

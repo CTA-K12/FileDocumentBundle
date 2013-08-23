@@ -1,0 +1,11 @@
+parameters:
+#    mesd_doctrine_extensions_table_prefixer.example.class: MESD\DoctrineExtensions\TablePrefixerBundle\Example
+
+
+services:
+#    mesd_doctrine_extensions_table_prefixer.example:
+#        class: %mesd_doctrine_extensions_table_prefixer.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    document:
+        class: MESD\File\DocumentBundle\Entity\Document
+        arguments: ["%kernel.root_dir%/../", "%dirs%"]
