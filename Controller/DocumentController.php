@@ -5,6 +5,7 @@ use MESD\File\DocumentBundle\Entity\Document;
 use MESD\File\DocumentBundle\FormType\DocumentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DocumentController extends Controller
@@ -50,7 +51,7 @@ class DocumentController extends Controller
             ) );
     }
 
-    public function downloadAction( Request $request ) {
+    public function downloadAction( Request $request, $id ) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $document = $em->getRepository( 'MESDFileDocumentBundle:Document' )->find( $id );
@@ -60,11 +61,13 @@ class DocumentController extends Controller
         }
 
         $headers = array(
-            'Content-Type' => $document->getMimeType()
+            'Content-Type' => $document->getMimeType()?:'file',
             'Content-Disposition' => 'attachment; filename="'.$document->getFilename().'"'
         );
 
-        $filename = $document->getPath().'/'.$document->getFilename();
+        $filename = $document->getPath().'/'.$document->getHash();
+        // var_dump($headers);
+        // var_dump($filename);die;
 
         return new Response( file_get_contents( $filename ), 200, $headers );
     }
