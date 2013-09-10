@@ -6,6 +6,7 @@ namespace MESD\File\DocumentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * MESD\File\DocumentBundle\Entity\Document
@@ -236,15 +237,30 @@ class Document {
      *
      * @param UploadedFile $file
      */
-    public function setFile( UploadedFile $file = null ) {
-        $this->file = $file;
-        // check if we have an old image path
-        if ( isset( $this->path ) ) {
-            // store the old name to delete after the update
-            $this->temp = $this->path;
-            $this->path = null;
-        } else {
-            $this->path = ( $this->path ?: $this->getDir() );
+    public function setFile( $file = null ) {
+        if('array' == gettype($file)){
+            foreach($file as $single){
+                    $this->file = $single;
+                // check if we have an old image path
+                if ( isset( $this->path ) ) {
+                    // store the old name to delete after the update
+                    $this->temp = $this->path;
+                    $this->path = null;
+                } else {
+                    $this->path = ( $this->path ?: $this->getDir() );
+                }
+            }
+        }
+        else{
+            $this->file = $file;
+            // check if we have an old image path
+            if ( isset( $this->path ) ) {
+                // store the old name to delete after the update
+                $this->temp = $this->path;
+                $this->path = null;
+            } else {
+                $this->path = ( $this->path ?: $this->getDir() );
+            }
         }
     }
 
