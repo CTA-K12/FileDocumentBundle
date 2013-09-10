@@ -52,7 +52,7 @@ class DocumentController extends Controller
     }
 
     public function downloadAction( Request $request, $id ) {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $document = $em->getRepository( 'MESDFileDocumentBundle:Document' )->find( $id );
 
