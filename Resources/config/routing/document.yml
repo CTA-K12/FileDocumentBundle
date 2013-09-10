@@ -6,3 +6,24 @@ MESDFileDocument_receiveUpload:
     pattern:  /receiveUpload
     defaults: { _controller: 'MESDFileDocumentBundle:Document:receiveUpload' }
     requirements: { _method: post }
+
+MESDFileDocument_download:
+    pattern:  /{id}/download
+    defaults: { _controller: 'MESDFileDocumentBundle:Document:download' }
+    requirements:
+        id: \d+
+
+document_upload:
+    pattern:  /upload
+    defaults: { _controller: 'MESDFileDocumentBundle:Document:upload' }
+
+document_receiveUpload:
+    pattern:  /receiveUpload
+    defaults: { _controller: 'MESDFileDocumentBundle:Document:receiveUpload' }
+    requirements: { _method: post }
+
+document_download:
+    pattern:  /{id}/download
+    defaults: { _controller: 'MESDFileDocumentBundle:Document:download' }
+    requirements:
+        id: \d+

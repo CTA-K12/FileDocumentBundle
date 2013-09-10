@@ -49,4 +49,23 @@ class DocumentController extends Controller
                 'form' => $form->createView()
             ) );
     }
+
+    public function downloadAction( Request $request ) {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $document = $em->getRepository( 'MESDFileDocumentBundle:Document' )->find( $id );
+
+        if ( !$document ) {
+            throw $this->createNotFoundException( 'Unable to find the document' );
+        }
+
+        $headers = array(
+            'Content-Type' => $document->getMimeType()
+            'Content-Disposition' => 'attachment; filename="'.$document->getFilename().'"'
+        );
+
+        $filename = $document->getPath().'/'.$document->getFilename();
+
+        return new Response( file_get_contents( $filename ), 200, $headers );
+    }
 }
