@@ -320,7 +320,8 @@ class Document {
      * life cycle cacllback: PostRemove
      */
     public function removeDocument() {
-        if ( $file = $this->getFullName() ) {
+        $file = $this->getFullName();
+        if ( $file && file_exists($file) ) {
             unlink( $file );
         }
     }
