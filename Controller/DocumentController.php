@@ -1,6 +1,6 @@
 <?php
 
-namespace Mesd\File\DocumentBundle\Controller;
+namespace Mesd\FileDocumentBundle\Controller;
 use Mesd\File\DocumentBundle\Entity\Document;
 use Mesd\File\DocumentBundle\FormType\DocumentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;

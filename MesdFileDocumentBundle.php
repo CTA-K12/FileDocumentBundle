@@ -1,6 +1,6 @@
 <?php
 
-namespace Mesd\File\DocumentBundle;
+namespace Mesd\FileDocumentBundle;
 
 use Symfony\Component\Console\Application;
 use Sensio\Bundle\GeneratorBundle\Generator\DoctrineCrudGenerator;

@@ -1,4 +1,4 @@
-Mesd\File\DocumentBundle\Entity\Document:
+Mesd\FileDocumentBundle\Entity\Document:
     type: entity
     table: document
     fields:

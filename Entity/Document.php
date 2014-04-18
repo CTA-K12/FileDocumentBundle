@@ -1,6 +1,6 @@
 <?php
 
-namespace Mesd\File\DocumentBundle\Entity;
+namespace Mesd\FileDocumentBundle\Entity;
 
 
 

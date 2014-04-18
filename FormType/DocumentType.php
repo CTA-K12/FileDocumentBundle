@@ -1,6 +1,6 @@
 <?php
 
-namespace Mesd\File\DocumentBundle\FormType;
+namespace Mesd\FileDocumentBundle\FormType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
