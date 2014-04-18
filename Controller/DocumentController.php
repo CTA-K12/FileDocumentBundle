@@ -1,8 +1,8 @@
 <?php
 
-namespace MESD\File\DocumentBundle\Controller;
-use MESD\File\DocumentBundle\Entity\Document;
-use MESD\File\DocumentBundle\FormType\DocumentType;
+namespace Mesd\File\DocumentBundle\Controller;
+use Mesd\File\DocumentBundle\Entity\Document;
+use Mesd\File\DocumentBundle\FormType\DocumentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +17,7 @@ class DocumentController extends Controller
             , $document
         );
 
-        return $this->render( 'MESDFileDocumentBundle:Document:upload.html.twig'
+        return $this->render( 'MesdFileDocumentBundle:Document:upload.html.twig'
             , array(
                 'form' => $form->createView()
             ) );
@@ -45,7 +45,7 @@ class DocumentController extends Controller
             return $this->redirect( $this->generateUrl( 'default' ) );
         }
 
-        return $this->render( 'MESDFileDocument_upload'
+        return $this->render( 'MesdFileDocument_upload'
             , array(
                 'form' => $form->createView()
             ) );
@@ -54,7 +54,7 @@ class DocumentController extends Controller
     public function downloadAction( Request $request, $id ) {
         $em = $this->getDoctrine()->getManager();
 
-        $document = $em->getRepository( 'MESDFileDocumentBundle:Document' )->find( $id );
+        $document = $em->getRepository( 'MesdFileDocumentBundle:Document' )->find( $id );
 
         if ( !$document ) {
             throw $this->createNotFoundException( 'Unable to find the document' );

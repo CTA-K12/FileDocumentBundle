@@ -4,7 +4,7 @@
     "type": "symfony-bundle",
     "description": "File Document bundle",
     "autoload": {
-        "psr-0": { "MESD\\File\\DocumentBundle": "" }
+        "psr-0": { "Mesd\\File\\DocumentBundle": "" }
     },
-    "target-dir": "MESD/File/DocumentBundle"
+    "target-dir": "Mesd/File/DocumentBundle"
 }

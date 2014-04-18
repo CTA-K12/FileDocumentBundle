@@ -1,6 +1,6 @@
 <?php
 
-namespace MESD\File\DocumentBundle\FormType;
+namespace Mesd\File\DocumentBundle\FormType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,7 +13,7 @@ class DocumentType extends AbstractType
         $builder->add( 'file', 'file' );
         $builder->add( 'category'
             , 'choice'
-            , array('choices' => \MESD\File\DocumentBundle\Entity\Document::getDirs()) );
+            , array('choices' => \Mesd\File\DocumentBundle\Entity\Document::getDirs()) );
         $builder->add( 'filename', null, array('required' => false) );
     }
 

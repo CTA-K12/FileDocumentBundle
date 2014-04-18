@@ -1,13 +1,13 @@
 <?php
 
-namespace MESD\File\DocumentBundle\DependencyInjection;
+namespace Mesd\File\DocumentBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
-class MESDFileDocumentExtension extends Extension
+class MesdFileDocumentExtension extends Extension
 {
     /**
      * Build the extension services

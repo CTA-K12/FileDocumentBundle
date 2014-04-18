@@ -1,6 +1,6 @@
 <?php
 
-namespace MESD\File\DocumentBundle\Entity;
+namespace Mesd\File\DocumentBundle\Entity;
 
 
 
@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * MESD\File\DocumentBundle\Entity\Document
+ * Mesd\File\DocumentBundle\Entity\Document
  */
 class Document {
     /**
@@ -66,7 +66,7 @@ class Document {
      * @return string
      */
     public static function getDirs() {
-        $vars=get_class_vars('MESD\File\DocumentBundle\Entity\Document');
+        $vars=get_class_vars('Mesd\File\DocumentBundle\Entity\Document');
         $list=array_filter(array_keys($vars['dirs'])
             , function ($e) {return $e != 'default' && $e != 'temp';} );
         $dirs=array();

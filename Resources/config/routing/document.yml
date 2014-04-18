@@ -1,29 +1,29 @@
-MESDFileDocument_upload:
+MesdFileDocument_upload:
     pattern:  /upload
-    defaults: { _controller: 'MESDFileDocumentBundle:Document:upload' }
+    defaults: { _controller: 'MesdFileDocumentBundle:Document:upload' }
 
-MESDFileDocument_receiveUpload:
+MesdFileDocument_receiveUpload:
     pattern:  /receiveUpload
-    defaults: { _controller: 'MESDFileDocumentBundle:Document:receiveUpload' }
+    defaults: { _controller: 'MesdFileDocumentBundle:Document:receiveUpload' }
     requirements: { _method: post }
 
-MESDFileDocument_download:
+MesdFileDocument_download:
     pattern:  /{id}/download
-    defaults: { _controller: 'MESDFileDocumentBundle:Document:download' }
+    defaults: { _controller: 'MesdFileDocumentBundle:Document:download' }
     requirements:
         id: \d+
 
 document_upload:
     pattern:  /upload
-    defaults: { _controller: 'MESDFileDocumentBundle:Document:upload' }
+    defaults: { _controller: 'MesdFileDocumentBundle:Document:upload' }
 
 document_receiveUpload:
     pattern:  /receiveUpload
-    defaults: { _controller: 'MESDFileDocumentBundle:Document:receiveUpload' }
+    defaults: { _controller: 'MesdFileDocumentBundle:Document:receiveUpload' }
     requirements: { _method: post }
 
 document_download:
     pattern:  /{id}/download
-    defaults: { _controller: 'MESDFileDocumentBundle:Document:download' }
+    defaults: { _controller: 'MesdFileDocumentBundle:Document:download' }
     requirements:
         id: \d+
