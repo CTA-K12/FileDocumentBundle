@@ -81,13 +81,9 @@ class Document {
     }
 
     public function __construct( $dir, $dirs ) {
-        var_dump('construct');
-        var_dump($dir);
-        var_dump($dirs);
         foreach ( $dirs as $key => $value ) {
             $this::$dirs[$key]=$dir.$value;
         }
-        var_dump('done construct');
     }
 
     /**
@@ -340,20 +336,6 @@ class Document {
         if ( null === $this->getFile() ) {
             return;
         }
-
-        // var_dump( 'upload' );
-        // var_dump( $this->path );
-        // var_dump( $this->temp );
-        // var_dump( 'get_dir' );
-        // var_dump( $this->getDefaultDir() );
-        // var_dump( $this->getDir() );
-        // var_dump( $this->filename );
-        // var_dump( $this->getFullName() );
-        // var_dump( 'hash' );
-        // var_dump( $this->hash );
-        // var_dump( sys_get_temp_dir() );
-        // var_dump($this);
-        // die;
 
         // if there is an error when moving the file, an exception will
         // be automatically thrown by move(). This will properly prevent

@@ -31,7 +31,6 @@ class DocumentController extends Controller
         );
 
         $form->bindRequest( $request );
-        // var_dump($form);die;
 
         if ( $form->isValid() ) {
             if ( $document->getFilename() === null ) {
@@ -66,8 +65,6 @@ class DocumentController extends Controller
         );
 
         $filename = $document->getPath().'/'.$document->getHash();
-        // var_dump($headers);
-        // var_dump($filename);die;
 
         return new Response( file_get_contents( $filename ), 200, $headers );
     }
