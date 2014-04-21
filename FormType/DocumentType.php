@@ -18,6 +18,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 //         'form' => $form->createView()
 //     )
 // );
+//
+// The service is automatically added when bundle is included at app kernel
 
 
 class DocumentType extends AbstractType
