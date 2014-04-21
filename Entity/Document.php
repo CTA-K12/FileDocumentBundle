@@ -2,14 +2,12 @@
 
 namespace Mesd\FileDocumentBundle\Entity;
 
-
-
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Mesd\File\DocumentBundle\Entity\Document
+ * Mesd\FileDocumentBundle\Entity\Document
  */
 class Document {
     /**
@@ -66,10 +64,16 @@ class Document {
      * @return string
      */
     public static function getDirs() {
-        $vars=get_class_vars('Mesd\File\DocumentBundle\Entity\Document');
-        $list=array_filter(array_keys($vars['dirs'])
-            , function ($e) {return $e != 'default' && $e != 'temp';} );
-        $dirs=array();
+        // not sure why this used string rather than $this
+        // self-referencing would be more robust here
+        // $vars = get_class_vars('Mesd\FileDocumentBundle\Entity\Document');
+        $vars = get_class_vars( get_called_class() );
+
+        $list = array_filter(
+            array_keys($vars['dirs']),
+            function ($e) { return $e != 'default' && $e != 'temp'; }
+            );
+        $dirs = array();
         foreach ($list as $key => $value) {
             $dirs[$value]=$value;
         }
@@ -77,10 +81,13 @@ class Document {
     }
 
     public function __construct( $dir, $dirs ) {
+        var_dump('construct');
+        var_dump($dir);
+        var_dump($dirs);
         foreach ( $dirs as $key => $value ) {
             $this::$dirs[$key]=$dir.$value;
         }
-        // var_dump($this::getCategories());die;
+        var_dump('done construct');
     }
 
     /**

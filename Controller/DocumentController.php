@@ -1,8 +1,8 @@
 <?php
 
 namespace Mesd\FileDocumentBundle\Controller;
-use Mesd\File\DocumentBundle\Entity\Document;
-use Mesd\File\DocumentBundle\FormType\DocumentType;
+use Mesd\FileDocumentBundle\Entity\Document;
+use Mesd\FileDocumentBundle\FormType\DocumentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
