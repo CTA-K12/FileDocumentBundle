@@ -1,30 +1,53 @@
 Mesd\FileDocumentBundle\Entity\Document:
-    type: entity
-    table: document
-    fields:
+    type:            entity
+    table:           filedocument_document
+    repositoryClass: Mesd\FileDocumentBundle\Entity\DocumentRepository
+    id:
         id:
-            id: true
-            type: bigint
+            type:     integer
+            id:       true
             nullable: false
             generator:
                 strategy: AUTO
+            sequenceGenerator:
+                sequenceName:   filedocument_document_id_seq
+                initialValue:   1
+                allocationSize: 1
+    fields:
         path:
-            type: string
-        filename:
-            type: string
-        mimetype:
-            type: string
-            nullable: true
-        category:
-            type: string
-            nullable: true
-        hash:
-            type:
+            column:   path
+            type:     string
+            length:   255
             nullable: false
+            unique:   false
+        filename:
+            column:   filename
+            type:     string
+            length:   255
+            nullable: false
+            unique:   false
+        mimetype:
+            column:   mimetype
+            type:     string
+            length:   255
+            nullable: true
+            unique:   false
+        category:
+            column:   category
+            type:     string
+            length:   255
+            nullable: true
+            unique:   false
+        hash:
+            column:   hash
+            type:     string
+            length:   255
+            nullable: false
+            unique:   true
     lifecycleCallbacks:
-        prePersist: [ preUpload ]
-        preUpdate: [ preUpload ]
+        prePersist:  [ preUpload ]
+        preUpdate:   [ preUpload ]
         postPersist: [ upload ]
-        postUpdate: [ upload ]
-        preRemove: [ storeFilenameForRemove ]
-        postRemove: [ removeDocument ]
+        postUpdate:  [ upload ]
+        preRemove:   [ storeFilenameForRemove ]
+        postRemove:  [ removeDocument ]

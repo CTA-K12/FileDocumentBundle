@@ -9,70 +9,102 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Mesd\FileDocumentBundle\Entity\Document
  */
-class Document {
+class Document
+{
     /**
-     *
+     * Id
      *
      * @var integer $id
      */
     private $id;
 
     /**
-     *
+     * Filename
      *
      * @var string $filename
      */
     private $filename;
 
     /**
-     *
+     * Path
      *
      * @var string $path
      */
     private $path;
 
     /**
-     *
+     * Mimetype
      *
      * @var string $mimetype
      */
     private $mimetype;
 
     /**
-     *
+     * category
      *
      * @var string $category
      */
     private $category;
 
     /**
-     *
+     * Hash
      *
      * @var string $hash
      */
     private $hash;
 
+    /**
+     * File
+     * 
+     * @var string $file
+     */
     private $file;
 
+    /**
+     * Temp
+     * 
+     * @var string $temp
+     */
     private $temp;
 
+    /**
+     * Dirs
+     * 
+     * @var string $dirs
+     */
     public static $dirs;
 
     /**
-     * Get category
+     * __construct
+     *
+     * Initialize document directories
+     * 
+     * @param string $dir  The directory
+     * @param array  $dirs An array of directories
+     */
+    public function __construct($dir, $dirs)
+    {
+        foreach ($dirs as $key => $value) {
+            $this::$dirs[$key] = $dir . $value;
+        }
+    }
+
+    /**
+     * Get Directories
      *
      * @return string
      */
-    public static function getDirs() {
+    public static function getDirs()
+    {
         // not sure why this used string rather than $this
         // self-referencing would be more robust here
         // $vars = get_class_vars('Mesd\FileDocumentBundle\Entity\Document');
-        $vars = get_class_vars( get_called_class() );
+        $vars = get_class_vars(get_called_class());
 
         $list = array_filter(
             array_keys($vars['dirs']),
             function ($e) { return $e != 'default' && $e != 'temp'; }
-            );
+           );
         $dirs = array();
         foreach ($list as $key => $value) {
             $dirs[$value]=$value;
@@ -80,25 +112,21 @@ class Document {
         return $dirs;
     }
 
-    public function __construct( $dir, $dirs ) {
-        foreach ( $dirs as $key => $value ) {
-            $this::$dirs[$key]=$dir.$value;
-        }
-    }
-
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * Default __toString.  Customize to suit
      */
-    public function __toString() {
+    public function __toString()
+    {
         return (string)$this->getId();
     }
 
@@ -108,7 +136,8 @@ class Document {
      * @param string  $filename
      * @return Document
      */
-    public function setFilename( $filename ) {
+    public function setFilename($filename)
+    {
         $this->filename = $filename;
 
         return $this;
@@ -119,7 +148,8 @@ class Document {
      *
      * @return string
      */
-    public function getFilename() {
+    public function getFilename()
+    {
         return $this->filename;
     }
 
@@ -129,7 +159,8 @@ class Document {
      * @param string  $path
      * @return Document
      */
-    public function setPath( $path ) {
+    public function setPath($path)
+    {
         $this->path = $path;
 
         return $this;
@@ -140,7 +171,8 @@ class Document {
      *
      * @return string
      */
-    public function getPath() {
+    public function getPath()
+    {
         return $this->path;
     }
 
@@ -150,7 +182,8 @@ class Document {
      * @param string  $mimetype
      * @return Document
      */
-    public function setMimetype( $mimetype ) {
+    public function setMimetype($mimetype)
+    {
         $this->mimetype = $mimetype;
 
         return $this;
@@ -161,7 +194,8 @@ class Document {
      *
      * @return string
      */
-    public function getMimetype() {
+    public function getMimetype()
+    {
         return $this->mimetype;
     }
 
@@ -171,7 +205,8 @@ class Document {
      * @param string  $category
      * @return Document
      */
-    public function setCategory( $category ) {
+    public function setCategory($category)
+    {
         $this->category = $category;
 
         return $this;
@@ -182,7 +217,8 @@ class Document {
      *
      * @return string
      */
-    public function getCategory() {
+    public function getCategory()
+    {
         return $this->category;
     }
 
@@ -191,7 +227,8 @@ class Document {
      *
      * @return string
      */
-    public function getHash() {
+    public function getHash()
+    {
         return $this->hash;
     }
 
@@ -201,7 +238,8 @@ class Document {
      * @param string  $hash
      * @return DocumentedEntity
      */
-    public function setHash( $hash ) {
+    public function setHash($hash)
+    {
         $this->hash = $hash;
 
         return $this;
@@ -213,8 +251,9 @@ class Document {
      * @param string  $hash
      * @return DocumentedEntity
      */
-    public function generateHash( $data ) {
-        $this->hash = hash( 'sha512', $data );
+    public function generateHash($data)
+    {
+        $this->hash = hash('sha512', $data);
 
         return $this;
     }
@@ -225,14 +264,15 @@ class Document {
      * @param string  $filename
      * @return DocumentedEntity
      */
-    public function generateHashFromFile( $filename ) {
-        $this->hash = hash_file( 'sha512', $filename );
+    public function generateHashFromFile($filename)
+    {
+        $this->hash = hash_file('sha512', $filename);
 
         return $this;
     }
 
     public function getFullName() {
-        return $this->path.'/'.$this->hash;
+        return $this->path . '/' . $this->hash;
     }
 
     /**
@@ -240,29 +280,32 @@ class Document {
      *
      * @param UploadedFile $file
      */
-    public function setFile( $file = null ) {
+    public function setFile(UploadedFile $file = null)
+    {
+        // if multiple uploads
         if('array' == gettype($file)){
             foreach($file as $single){
                     $this->file = $single;
                 // check if we have an old image path
-                if ( isset( $this->path ) ) {
+                if (isset($this->path)) {
                     // store the old name to delete after the update
                     $this->temp = $this->path;
                     $this->path = null;
                 } else {
-                    $this->path = ( $this->path ?: $this->getDir() );
+                    $this->path = ($this->path ? : $this->getDir());
                 }
             }
         }
+        // if single file upload
         else{
             $this->file = $file;
             // check if we have an old image path
-            if ( isset( $this->path ) ) {
+            if (isset($this->path)) {
                 // store the old name to delete after the update
                 $this->temp = $this->path;
                 $this->path = null;
             } else {
-                $this->path = ( $this->path ?: $this->getDir() );
+                $this->path = ($this->path ? : $this->getDir());
             }
         }
     }
@@ -272,81 +315,101 @@ class Document {
      *
      * @return UploadedFile
      */
-    public function getFile() {
+    public function getFile()
+    {
         return $this->file;
     }
 
     /**
-     * life cycle cacllback: PrePersist/PreUpdate
+     * Pre upload
+     *
+     * Generates a filename,
+     * creates a dir if not present,
+     * sets extension, and
+     * sets permissions.
+     * This function is called on prepersist and preupdate lifecylce callbacks
+     *
+     * @todo  Add options for filenames, leaving mimetypes attached, and default permissions
      */
-    public function preUpload() {
-        if ( null !== $this->getFile() ) {
-            $this->generateHashFromFile( $this->getFile() );
+    public function preUpload()
+    {
+
+        if (null !== $this->getFile()) {
+            $this->generateHashFromFile($this->getFile());
             $this->path = $this->getDir();
             $this->mimetype = $this->getFile()->guessExtension();
         }
-        if ( !realpath( $this->path ) ) { mkdir( $this->path, 0770, true ); }
-        $this->path=realpath( $this->path );
+        
+        if (!realpath($this->path)) {
+            mkdir($this->path, 0770, true);
+        }
+        
+        $this->path=realpath($this->path);
     }
 
-    public function getDefaultDir() {
+    public function getDefaultDir()
+    {
         return
-        isset( $this::$dirs['default'] )
-            ? $this::$dirs['default'].'default'
+        isset($this::$dirs['default'])
+            ? $this::$dirs['default'] . 'default'
             : ''
         ;
     }
 
-    public function getTempDir() {
-        return isset( $this::$dirs['temp'] )
+    public function getTempDir()
+    {
+        return isset($this::$dirs['temp'])
             ? $this::$dirs['temp']
             : $this->getDefaultDir();
     }
 
-    public function getDir() {
-        return ( isset( $this::$dirs[$this->category] )
+    public function getDir()
+    {
+        return (isset($this::$dirs[$this->category])
             ? $this::$dirs[$this->category]
-            : $this->getDefaultDir() )
-            .( isset( $this->hash )
-            ? '/'.substr( $this->hash, 0, 2 ).'/'.substr( $this->hash, 2, 2 ).'/'.substr( $this->hash, 4, 2 )
-            : '' );
+            : $this->getDefaultDir()) . (isset($this->hash)
+            ? '/' . substr($this->hash, 0, 2) . '/' . substr($this->hash, 2, 2) . '/' . substr($this->hash, 4, 2)
+            : '');
     }
 
     /**
      * life cycle cacllback: PreRemove
      */
-    public function storeFilenameForRemove() {
-        $this->temp = $this->getTempDir().'/'.$this->hash;
+    public function storeFilenameForRemove()
+    {
+        $this->temp = $this->getTempDir() . '/' . $this->hash;
     }
 
     /**
      * life cycle cacllback: PostRemove
      */
-    public function removeDocument() {
+    public function removeDocument()
+    {
         $file = $this->getFullName();
-        if ( $file && file_exists($file) ) {
-            unlink( $file );
+        if ($file && file_exists($file)) {
+            unlink($file);
         }
     }
 
     /**
      * life cycle cacllback: PostPersist/PostUpdate
      */
-    public function upload() {
-        if ( null === $this->getFile() ) {
+    public function upload()
+    {
+        if (null === $this->getFile()) {
             return;
         }
 
         // if there is an error when moving the file, an exception will
         // be automatically thrown by move(). This will properly prevent
         // the entity from being persisted to the database on error
-        if ( !file_exists( $this->getFullName() ) ) {
-            $this->getFile()->move( $this->getDir(), $this->getFullName() );
+        if (!file_exists($this->getFullName())) {
+            $this->getFile()->move($this->getDir(), $this->getFullName());
         }
         // check if we have an old image
-        if ( isset( $this->temp ) ) {
+        if (isset($this->temp)) {
             // delete the old image
-            unlink( $this->getTempDir().'/'.$this->hash );
+            unlink($this->getTempDir().'/'.$this->hash);
             // clear the temp image path
             $this->temp = null;
         }
@@ -355,21 +418,19 @@ class Document {
 
     // this function is intended for a symfony application-generated file.
 
-    public function write( $data ) {
-        if ( isset( $this::$dirs[$this->getCategory()] ) ) {
+    public function write($data)
+    {
+        if (isset($this::$dirs[$this->getCategory()])) {
             $this->path = $this::$dirs[$this->getCategory()];
         } else {
-            $this->path = ( $this->path ?: getDefaultDir() );
+            $this->path = ($this->path ?: getDefaultDir());
         }
 
-        $this->generateHash( $data );
-        $this->path.='/'.substr( $this->hash, 0, 2 ).'/'.substr( $this->hash, 2, 2 ).'/'.substr( $this->hash, 4, 2 );
-        if ( !realpath( $this->path ) ) { mkdir( $this->path, 0770, true ); }
-        $this->path=realpath( $this->path );
+        $this->generateHash($data);
+        $this->path.='/'.substr($this->hash, 0, 2) . '/' . substr($this->hash, 2, 2) . '/' . substr($this->hash, 4, 2);
+        if (!realpath($this->path)) { mkdir($this->path, 0770, true); }
+        $this->path=realpath($this->path);
 
-        file_put_contents(
-            $this->getFullName()
-            , $data
-        );
+        file_put_contents($this->getFullName(), $data);
     }
 }

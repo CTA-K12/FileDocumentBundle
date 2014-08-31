@@ -9,8 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 // Note:  you will have to 'get the service' to use this type in your controller
 
-// $document = $this->get( 'document' );
-// $form   = $this->createForm( new DocumentType(), $document );
+// $document = $this->get('document');
+// $form   = $this->createForm(new DocumentType(), $document);
 
 // return $this->render(
 //     'MesdFileDocumentBundle:Document:upload.html.twig',
@@ -24,26 +24,29 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class DocumentType extends AbstractType
 {
-    public function buildForm( FormBuilderInterface $builder, array $options ) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
 
-        $builder->add( 'file', 'file' );
+        $builder->add('file', 'file');
 
-        $builder->add( 'category' ,
-            'choice' ,
-            array( 'choices' => \Mesd\FileDocumentBundle\Entity\Document::getDirs() )
+        $builder->add(
+            'category',
+            'choice',
+            array('choices' => \Mesd\FileDocumentBundle\Entity\Document::getDirs())
         );
 
-        $builder->add( 'filename', null, array( 'required' => false ) );
+        $builder->add('filename', null, array('required' => false));
     }
 
-    public function setDefaultOptions( OptionsResolverInterface $resolver ) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults(
-            array(
-            )
+            array()
         );
     }
 
-    public function getName() {
-        return 'mesd_file_documenttype';
+    public function getName()
+    {
+        return 'mesd_filedocument_documenttype';
     }
 }
