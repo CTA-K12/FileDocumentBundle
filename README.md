@@ -1,4 +1,4 @@
 FileDocumentBundle
 ==================
 
-As far as we can tell, files 4 MB and larger causes issues with this bundle.
+The size of the file is limited by the upload_max_filesize setting in the php configuration.  By default it is set to 2 MB.
