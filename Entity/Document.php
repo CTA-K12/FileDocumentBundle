@@ -359,7 +359,7 @@ class Document {
         if ( isset( $this::$dirs[$this->getCategory()] ) ) {
             $this->path = $this::$dirs[$this->getCategory()];
         } else {
-            $this->path = ( $this->path ?: getDefaultDir() );
+            $this->path = ( $this->path ?: $this->getDefaultDir() );
         }
 
         $this->generateHash( $data );
