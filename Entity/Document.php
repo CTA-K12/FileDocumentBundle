@@ -372,4 +372,26 @@ class Document {
             , $data
         );
     }
+
+    public function getFilesize()
+    {
+        $filename = $this->getPath().'/'.$this->getHash();
+        $filesize = filesize($filename);
+        $fileunit = "B";
+        if ($filesize > 1024) {
+            $fileunit = "kB";
+            $filesize /=1024;
+        }
+        if ($filesize > 1024) {
+            $fileunit = "MB";
+            $filesize /=1024;
+        }
+        if ($filesize > 1024) {
+            $fileunit = "GB";
+            $filesize /=1024;
+        }
+        $filesize=round($filesize, 2);
+
+        return $filesize." ".$fileunit;
+    }
 }
