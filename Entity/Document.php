@@ -373,6 +373,10 @@ class Document {
         );
     }
 
+    public function read() {
+        return file_get_contents($this->getFullName());
+    }
+
     public function getFilesize()
     {
         $filename = $this->getPath().'/'.$this->getHash();
