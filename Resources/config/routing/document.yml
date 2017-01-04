@@ -1,29 +1,29 @@
 MesdFileDocument_upload:
-    pattern:  /upload
+    path:  /upload
     defaults: { _controller: 'MesdFileDocumentBundle:Document:upload' }
 
 MesdFileDocument_receiveUpload:
-    pattern:  /receiveUpload
+    path:  /receiveUpload
     defaults: { _controller: 'MesdFileDocumentBundle:Document:receiveUpload' }
-    requirements: { _method: post }
+    requirements: { methods: post }
 
 MesdFileDocument_download:
-    pattern:  /{id}/download
+    path:  /{id}/download
     defaults: { _controller: 'MesdFileDocumentBundle:Document:download' }
     requirements:
         id: \d+
 
 document_upload:
-    pattern:  /upload
+    path:  /upload
     defaults: { _controller: 'MesdFileDocumentBundle:Document:upload' }
 
 document_receiveUpload:
-    pattern:  /receiveUpload
+    path:  /receiveUpload
     defaults: { _controller: 'MesdFileDocumentBundle:Document:receiveUpload' }
-    requirements: { _method: post }
+    requirements: { methods: post }
 
 document_download:
-    pattern:  /{id}/download
+    path:  /{id}/download
     defaults: { _controller: 'MesdFileDocumentBundle:Document:download' }
     requirements:
         id: \d+
