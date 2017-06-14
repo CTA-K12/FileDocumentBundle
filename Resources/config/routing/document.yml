@@ -5,7 +5,8 @@ MesdFileDocument_upload:
 MesdFileDocument_receiveUpload:
     path:  /receiveUpload
     defaults: { _controller: 'MesdFileDocumentBundle:Document:receiveUpload' }
-    requirements: { methods: post }
+    methods: [POST]
+    requirements: {}
 
 MesdFileDocument_download:
     path:  /{id}/download
@@ -20,7 +21,8 @@ document_upload:
 document_receiveUpload:
     path:  /receiveUpload
     defaults: { _controller: 'MesdFileDocumentBundle:Document:receiveUpload' }
-    requirements: { methods: post }
+    methods: [POST]
+    requirements: {}
 
 document_download:
     path:  /{id}/download
